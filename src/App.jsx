@@ -1,22 +1,28 @@
-import { useState } from 'react'
-
-import Emails from './Components/Emails'
-
-import initialEmails from './data/emails'
-
 import './styles/App.css'
+import { useState } from 'react'
+import initialEmails from './data/emails'
+//Import Components
+import Emails from './Components/Emails'
+import LeftMenu from './Components/LeftMenu'
 
-const getReadEmails = emails => emails.filter(email => !email.read)
 
-const getStarredEmails = emails => emails.filter(email => email.starred)
+
+// const getReadEmails = emails => emails.filter(email => !email.read)
+
+// const getStarredEmails = emails => emails.filter(email => email.starred)
 
 function App() {
   const [emails, setEmails] = useState(initialEmails)
-  const [hideRead, setHideRead] = useState(false)
-  const [currentTab, setCurrentTab] = useState('inbox')
+      const [hideRead, setHideRead] = useState(false)
+    const [currentTab, setCurrentTab] = useState('inbox')
 
-  const unreadEmails = emails.filter(email => !email.read)
-  const starredEmails = emails.filter(email => email.starred)
+  let filteredEmails = emails
+  
+  // const [hideRead, setHideRead] = useState(false)
+  // const [currentTab, setCurrentTab] = useState('inbox')
+
+  // const unreadEmails = emails.filter(email => !email.read)
+  // const starredEmails = emails.filter(email => email.starred)
 
   // const toggleStar = targetEmail => {
   //   const updatedEmails = emails =>
@@ -36,12 +42,12 @@ function App() {
   //   setEmails(updatedEmails)
   // }
 
-  let filteredEmails = emails
+  
 
-  if (hideRead) filteredEmails = getReadEmails(filteredEmails)
+  // if (hideRead) filteredEmails = getReadEmails(filteredEmails)
 
-  if (currentTab === 'starred')
-    filteredEmails = getStarredEmails(filteredEmails)
+  // if (currentTab === 'starred')
+  //   filteredEmails = getStarredEmails(filteredEmails)
 
   return (
     <div className="app">
@@ -61,7 +67,8 @@ function App() {
           <input className="search-bar" placeholder="Search mail" />
         </div>
       </header>
-      <nav className="left-menu">
+
+      {/* <nav className="left-menu">
         <ul className="inbox-list">
           <li
             className={`item ${currentTab === 'inbox' ? 'active' : ''}`}
@@ -88,7 +95,9 @@ function App() {
             />
           </li>
         </ul>
-      </nav>
+      </nav> */}
+  
+      <LeftMenu emails={emails}  />
 
       <Emails filteredEmails={filteredEmails} setEmails={setEmails}/>
     </div>
